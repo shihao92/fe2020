@@ -1,16 +1,22 @@
 import React, { Component } from 'react'
+import { BrowserRouter } from 'react-router-dom'
+import { Provider } from 'react-redux';
 
-import CustomButton from './components/Button'
-import CustomSidemenu from './components/Sidemenu'
+import CustomRouter from './router'
+
+import configureStore from './store/config';
 
 import logo from './logo.svg';
 import './App.css';
 
 import 'bootstrap/dist/css/bootstrap.css'
 
+let store = configureStore()
+
 class App extends Component {
   state = {
-    count: 0
+    count: 0,
+    title: 'sidemenu'
   }
 
   componentWillMount = () => {
@@ -36,30 +42,11 @@ class App extends Component {
 
   render = () => {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h4>{ this.state.count }</h4>
-          <CustomSidemenu />
-          <CustomButton
-            type="success"
-            onClick={() => {
-              this.setState({ count: this.state.count + 1 })
-            }}>
-            Click Me!
-          </CustomButton>
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer">
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Provider store={ store }>
+        <BrowserRouter>
+          <CustomRouter />
+        </BrowserRouter>
+      </Provider>
     )
   }
 }
