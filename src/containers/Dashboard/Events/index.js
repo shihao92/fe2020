@@ -8,7 +8,7 @@ import WithEvents from './actions'
 import { storeProfileName } from '../../../actions/profile'
 
 class Events extends Component {
-
+  
   componentDidMount = () => {
     console.log( this.props, 'events props' )
     this.props.getEvents()
